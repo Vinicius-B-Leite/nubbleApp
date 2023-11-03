@@ -1,28 +1,37 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
 import Box, { TouchableOpacityBox, TouchableOpacityBoxProps } from '../Box';
 import { Text } from '../Text';
+import { ButtonPreset, buttonPreset } from './buttonPreset';
+import ActivityIndicator from '../ActivityIndicator';
+
+
+
+
 
 type ButtonProps = TouchableOpacityBoxProps & {
     loading?: boolean
-    title: string
+    disabled?: boolean
+    title: string,
+    preset?: ButtonPreset
 }
 
-const Button: React.FC<ButtonProps> = ({ title, loading, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ title, loading, preset = 'primary', disabled, ...rest }) => {
+    const buttonPresetSelected = buttonPreset[preset][disabled ? 'disabled' : 'default']
     return (
         <TouchableOpacityBox
+            disabled={disabled || loading}
             height={50}
-            backgroundColor='buttonPrimary'
             alignItems='center'
             justifyContent='center'
             paddingHorizontal='s20'
             borderRadius='s16'
+            {...buttonPresetSelected.container}
             {...rest}
         >
 
             {loading ?
-                <ActivityIndicator /> :
-                <Text preset='paragraphMedium' bold italic color='primaryContrast'>{title}</Text>
+                <ActivityIndicator color={buttonPresetSelected.content} /> :
+                <Text preset='paragraphMedium' bold italic color={buttonPresetSelected.content}>{title}</Text>
             }
 
         </TouchableOpacityBox>
