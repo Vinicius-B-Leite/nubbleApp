@@ -5,7 +5,7 @@ import { $fontFamily, Text, $fontSizes } from '../Text';
 import { useAppTheme } from '../../hook/useAppTheme';
 import { err } from 'react-native-svg/lib/typescript/xml';
 
-type TextInputProps = RNTextInputProps & {
+export type TextInputProps = RNTextInputProps & {
     label: string
     errorMessage?: string
     RightComponent?: React.ReactElement
