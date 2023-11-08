@@ -23,6 +23,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, errorMessage, RightCompone
                     <RNTextInput
                         ref={inputRef}
                         placeholderTextColor={colors.gray2}
+                        autoCapitalize='none'
                         style={{
                             flexGrow: 1,
                             flexShrink: 1,

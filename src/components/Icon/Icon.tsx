@@ -1,4 +1,5 @@
 import React from 'react';
+import { Pressable } from 'react-native';
 import { ArrowLeftIcon } from '../../assets/icons/ArrowLeftIcon';
 import { ArrowRightIcon } from '../../assets/icons/ArrowRightIcon';
 import { BellIcon } from '../../assets/icons/BellIcon';
@@ -9,6 +10,7 @@ import { CameraIcon } from '../../assets/icons/CameraIcon';
 import { ChatIcon } from '../../assets/icons/ChatIcon';
 import { ChatOnIcon } from '../../assets/icons/ChatOnIcon';
 import { CheckIcon } from '../../assets/icons/CheckIcon';
+import { CheckRoundIcon } from '../../assets/icons/CheckRoundIcon';
 import { ChevronRightIcon } from '../../assets/icons/ChevronRightIcon';
 import { CommentIcon } from '../../assets/icons/CommentIcon';
 import { EyeOffIcon } from '../../assets/icons/EyeOffIcon';
@@ -20,71 +22,77 @@ import { HeartIcon } from '../../assets/icons/HeartIcon';
 import { HomeFillIcon } from '../../assets/icons/HomeFillIcon';
 import { HomeIcon } from '../../assets/icons/HomeIcon';
 import { MessageIcon } from '../../assets/icons/MessageIcon';
+import { MessageRoundIcon } from '../../assets/icons/MessageRoundIcon';
 import { NewPostIcon } from '../../assets/icons/NewPostIcon';
 import { ProfileFillIcon } from '../../assets/icons/ProfileFillIcon';
 import { ProfileIcon } from '../../assets/icons/ProfileIcon';
 import { SearchIcon } from '../../assets/icons/SearchIcon';
 import { SettingsIcon } from '../../assets/icons/SettingsIcon';
 import { TrashIcon } from '../../assets/icons/TrashIcon';
-import { ThemeColors } from '../../theme/theme';
 import { useAppTheme } from '../../hook/useAppTheme';
-import { Pressable } from 'react-native';
+import { ThemeColors } from '../../theme/theme';
 
 export interface IconBase {
-    size?: number;
-    color?: string;
+  size?: number;
+  color?: string;
 }
 
-interface Props {
-    name: IconName;
-    color?: ThemeColors;
-    size?: number;
-    onPress?: () => void
+export interface IconProps {
+  name: IconName;
+  color?: ThemeColors;
+  size?: number;
+  onPress?: () => void;
 }
-export function Icon({ name, color = 'backgroundContrast', size, onPress }: Props) {
-    const { colors } = useAppTheme();
-    const SVGIcon = iconRegistry[name];
+export function Icon({
+  name,
+  color = 'backgroundContrast',
+  size,
+  onPress,
+}: IconProps) {
+  const { colors } = useAppTheme();
+  const SVGIcon = iconRegistry[name];
 
-    if (onPress) {
-        return (
-            <Pressable onPress={onPress} hitSlop={10}>
-                <SVGIcon color={colors[color]} size={size} />
-            </Pressable>
-        )
-    }
+  if (onPress) {
+    return (
+      <Pressable hitSlop={10} onPress={onPress}>
+        <SVGIcon color={colors[color]} size={size} />
+      </Pressable>
+    );
+  }
 
-
-    return <SVGIcon color={colors[color]} size={size} />;
+  return <SVGIcon color={colors[color]} size={size} />;
 }
 
 const iconRegistry = {
-    arrowLeft: ArrowLeftIcon,
-    arrowRight: ArrowRightIcon,
-    bell: BellIcon,
-    bellOn: BellOnIcon,
-    bookmark: BookmarkIcon,
-    bookmarkFill: BookmarkFillIcon,
-    camera: CameraIcon,
-    chat: ChatIcon,
-    chatOn: ChatOnIcon,
-    check: CheckIcon,
-    comment: CommentIcon,
-    chevronRight: ChevronRightIcon,
-    eyeOn: EyeOnIcon,
-    eyeOff: EyeOffIcon,
-    flashOn: FlashOnIcon,
-    flashOff: FlashOffIcon,
-    heart: HeartIcon,
-    heartFill: HeartFillIcon,
-    home: HomeIcon,
-    homeFill: HomeFillIcon,
-    message: MessageIcon,
-    newPost: NewPostIcon,
-    profile: ProfileIcon,
-    profileFill: ProfileFillIcon,
-    search: SearchIcon,
-    settings: SettingsIcon,
-    trash: TrashIcon,
+  arrowLeft: ArrowLeftIcon,
+  arrowRight: ArrowRightIcon,
+  bell: BellIcon,
+  bellOn: BellOnIcon,
+  bookmark: BookmarkIcon,
+  bookmarkFill: BookmarkFillIcon,
+  camera: CameraIcon,
+  chat: ChatIcon,
+  chatOn: ChatOnIcon,
+  check: CheckIcon,
+  checkRound: CheckRoundIcon,
+  comment: CommentIcon,
+  chevronRight: ChevronRightIcon,
+  eyeOn: EyeOnIcon,
+  eyeOff: EyeOffIcon,
+  flashOn: FlashOnIcon,
+  flashOff: FlashOffIcon,
+  heart: HeartIcon,
+  heartFill: HeartFillIcon,
+  home: HomeIcon,
+  homeFill: HomeFillIcon,
+  message: MessageIcon,
+  messageRound: MessageRoundIcon,
+  newPost: NewPostIcon,
+  profile: ProfileIcon,
+  profileFill: ProfileFillIcon,
+  search: SearchIcon,
+  settings: SettingsIcon,
+  trash: TrashIcon,
 };
 
 type IconType = typeof iconRegistry;

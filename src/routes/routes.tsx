@@ -4,12 +4,19 @@ import React from 'react';
 import Login from '../screen/auth/Login/Login';
 import SingUp from '../screen/auth/SingUp/SingUp';
 import Success from '../screen/auth/Success/Success';
+import { IconProps } from '../components/Icon/Icon';
+import ForgetPassword from '../screen/auth/ForgetPassword/ForgetPassword';
 
 
 export type StackParamsList = {
     Login: undefined
     SingUp: undefined
-    Success: undefined
+    Success: {
+        title: string,
+        description: string,
+        icon: Pick<IconProps, 'name' | 'color'>
+    },
+    ForgetPassword: undefined
 }
 
 
@@ -22,6 +29,7 @@ const Router: React.FC = () => {
                 <Stack.Screen name='Login' component={Login} />
                 <Stack.Screen name='SingUp' component={SingUp} />
                 <Stack.Screen name='Success' component={Success} />
+                <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -2,7 +2,7 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native';
 import Box, { TouchableOpacityBox } from '../Box';
 import useAppSafeArea from '../../hook/useAppSafeArea';
-import { Icon } from '../Icon';
+import { Icon } from '../Icon/Icon';
 import { Text } from '../Text';
 import { useAppTheme } from '../../hook/useAppTheme';
 import { useNavigation } from '@react-navigation/native';
