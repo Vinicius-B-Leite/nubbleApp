@@ -1,26 +1,19 @@
 import React from 'react';
-import { Pressable, SafeAreaView, View } from 'react-native';
-import { Text } from '../../../components/Text';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-import Screen from '../../../components/Screen/Screen';
+import { Pressable } from 'react-native';
+import { Text, Icon, Screen, FormTextInput, FormPasswordInput, Button } from '@components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackParamsList } from '../../../routes/routes';
-import { Icon } from '../../../components/Icon/Icon';
-import { Controller, useForm } from 'react-hook-form';
-import FormTextInput from '../../../components/Form/FormTextInput';
-import FormPasswordInput from '../../../components/Form/FormPasswordInput';
+import { StackParamsList } from '@routes';
+import { useForm } from 'react-hook-form';
+import { LoginFormType, loginSchema } from './loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 
 
-type LoginFormType = {
-    email: string,
-    password: string
-}
 type LoginProps = NativeStackScreenProps<StackParamsList, 'Login'>
 
-const Login: React.FC<LoginProps> = ({ navigation }) => {
+export const Login: React.FC<LoginProps> = ({ navigation }) => {
     const { control, formState, handleSubmit } = useForm<LoginFormType>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: '',
             password: ''
@@ -42,13 +35,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
             <FormTextInput
                 control={control}
                 name='email'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                    pattern: {
-                        value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-                        message: 'Email inválido'
-                    }
-                }}
                 label='Email'
                 placeholder='Digite seu e-mail'
                 boxProps={{
@@ -59,13 +45,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
             <FormPasswordInput
                 control={control}
                 name='password'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                    minLength: {
-                        value: 6,
-                        message: 'Minimo de 6 caracteres'
-                    }
-                }}
                 label='Senha'
                 placeholder='Digite sua senha'
                 RightComponent={<Icon name='eyeOff' color='gray2' />}
@@ -93,4 +72,3 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     )
 }
 
-export default Login;

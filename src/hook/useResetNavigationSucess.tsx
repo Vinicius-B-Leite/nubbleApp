@@ -1,8 +1,8 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { StackParamsList } from "../routes/routes";
+import { StackParamsList } from '@routes';
 
 
-export default function useResetNavigationSuccess() {
+export function useResetNavigationSuccess() {
 
     const navigation = useNavigation()
     const navigateToSucess = (params: StackParamsList['Success']) => {

@@ -1,9 +1,7 @@
 import React, { useRef } from 'react';
 import { Pressable, TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
-import Box, { BoxProps } from '../Box';
-import { $fontFamily, Text, $fontSizes } from '../Text';
-import { useAppTheme } from '../../hook/useAppTheme';
-import { err } from 'react-native-svg/lib/typescript/xml';
+import { $fontFamily, Text, $fontSizes, BoxProps, Box } from '@components';
+import { useAppTheme } from '@hooks';
 
 export type TextInputProps = RNTextInputProps & {
     label: string
@@ -12,7 +10,7 @@ export type TextInputProps = RNTextInputProps & {
     boxProps?: BoxProps
 }
 
-const TextInput: React.FC<TextInputProps> = ({ label, errorMessage, RightComponent, boxProps, ...rest }) => {
+export const TextInput: React.FC<TextInputProps> = ({ label, errorMessage, RightComponent, boxProps, ...rest }) => {
     const { colors } = useAppTheme()
     const inputRef = useRef<RNTextInput>(null)
     return (
@@ -45,5 +43,3 @@ const TextInput: React.FC<TextInputProps> = ({ label, errorMessage, RightCompone
         </Box>
     )
 }
-
-export default TextInput;

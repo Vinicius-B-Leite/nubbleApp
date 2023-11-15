@@ -1,28 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
-import Screen from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text';
-import TextInput from '../../../components/TextInput';
-import { Icon } from '../../../components/Icon/Icon';
-import Button from '../../../components/Button';
-import PasswordInput from '../../../components/PasswordInput/PasswordInput';
-import useResetNavigationSuccess from '../../../hook/useResetNavigationSucess';
-import { Controller, useForm } from 'react-hook-form';
-import FormTextInput from '../../../components/Form/FormTextInput';
-import FormPasswordInput from '../../../components/Form/FormPasswordInput';
+import { useResetNavigationSuccess } from '@hooks';
+import { useForm } from 'react-hook-form';
+import { SingupSchema, singupSchemachema } from './singupSchema';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Screen, Text, FormTextInput, FormPasswordInput, Button } from '@components'
 
 
 
-type SingUpFormType = {
-    username: string,
-    fullName: string,
-    email: string,
-    password: string
-}
-
-const SingUp: React.FC = () => {
+export const SingUp: React.FC = () => {
     const { navigateToSucess } = useResetNavigationSuccess()
-    const { control, formState, handleSubmit } = useForm<SingUpFormType>({
+    const { control, formState, handleSubmit } = useForm<SingupSchema>({
+        resolver: zodResolver(singupSchemachema),
         defaultValues: {
             email: '',
             fullName: '',
@@ -50,9 +38,6 @@ const SingUp: React.FC = () => {
                 control={control}
                 label='Seu username'
                 name='username'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                }}
                 placeholder='@'
                 boxProps={{
                     mb: 's20'
@@ -64,9 +49,6 @@ const SingUp: React.FC = () => {
                 name='fullName'
                 label='Nome completo'
                 placeholder='Digie seu nome'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                }}
                 boxProps={{
                     mb: 's20'
                 }}
@@ -75,13 +57,6 @@ const SingUp: React.FC = () => {
                 control={control}
                 name='email'
                 label='Email'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                    pattern: {
-                        value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-                        message: 'Email inválido'
-                    }
-                }}
                 placeholder='Digie seu email'
                 boxProps={{
                     mb: 's20'
@@ -91,13 +66,6 @@ const SingUp: React.FC = () => {
             <FormPasswordInput
                 control={control}
                 name='password'
-                rules={{
-                    required: 'Este campo é obrigatório',
-                    minLength: {
-                        message: 'Mínimo 6 caracteres',
-                        value: 6
-                    }
-                }}
                 label='Senha'
                 placeholder='Digie sua senha'
                 boxProps={{
@@ -110,4 +78,3 @@ const SingUp: React.FC = () => {
     )
 }
 
-export default SingUp;

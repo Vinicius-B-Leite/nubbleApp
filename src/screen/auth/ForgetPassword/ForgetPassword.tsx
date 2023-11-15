@@ -1,15 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
-import Screen from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-import useResetNavigationSuccess from '../../../hook/useResetNavigationSucess';
+import { useResetNavigationSuccess } from '@hooks';
+import { useForm } from 'react-hook-form';
+import { ForgetPasswordForm, forgetPasswordSchema } from './forgetPasswodSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Screen, Text, FormTextInput, Button } from '@components'
 
 
-
-const ForgetPassword: React.FC = () => {
+export const ForgetPassword: React.FC = () => {
     const { navigateToSucess } = useResetNavigationSuccess()
+    const { control, handleSubmit, formState } = useForm<ForgetPasswordForm>({
+        resolver: zodResolver(forgetPasswordSchema),
+        defaultValues: {
+            email: '',
+        },
+        mode: 'onChange'
+    })
 
     const handleNavigateToSucess = () => {
         navigateToSucess({
@@ -27,17 +32,18 @@ const ForgetPassword: React.FC = () => {
             <Text preset='headingLarge' bold >Esqueci minha senha</Text>
             <Text preset='paragraphLarge' mt='s16'>Digite seu e-mail e enviaremos as instruções para redefinição de senha</Text>
 
-            <TextInput
+
+            <FormTextInput
+                control={control}
                 label='Email'
+                name='email'
                 placeholder='Digite seu e-mail'
                 boxProps={{
                     mt: 's32'
                 }}
             />
 
-            <Button title='Recuperar senha' mt='s48' onPress={handleNavigateToSucess} />
+            <Button disabled={!formState.isValid} title='Recuperar senha' mt='s48' onPress={handleNavigateToSucess} />
         </Screen>
     )
 }
-
-export default ForgetPassword;

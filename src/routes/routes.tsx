@@ -1,11 +1,8 @@
+import { ForgetPassword, Login, SingUp, Success } from '@screens'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Login from '../screen/auth/Login/Login';
-import SingUp from '../screen/auth/SingUp/SingUp';
-import Success from '../screen/auth/Success/Success';
-import { IconProps } from '../components/Icon/Icon';
-import ForgetPassword from '../screen/auth/ForgetPassword/ForgetPassword';
+import { IconProps } from '@components';
 
 
 export type StackParamsList = {

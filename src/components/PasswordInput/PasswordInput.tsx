@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import TextInput, { TextInputProps } from '../TextInput';
-import { Icon } from '../Icon/Icon';
+import { TextInputProps, TextInput, Icon } from '@components';
 
 type PasswordInputProps = Omit<TextInputProps, 'RightComponent'>
 
-const PasswordInput: React.FC<PasswordInputProps> = (props) => {
+export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
     const [isSecureTextEntry, setIsSecureTextEntry] = useState(true)
 
 
@@ -22,4 +21,3 @@ const PasswordInput: React.FC<PasswordInputProps> = (props) => {
     )
 }
 
-export default PasswordInput;

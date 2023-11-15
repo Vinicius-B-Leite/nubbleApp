@@ -5,7 +5,7 @@ import {
     TextProps as RNTextProps,
     TextStyle,
 } from 'react-native';
-import { Theme } from '../../theme/theme';
+import { Theme } from '@theme';
 
 interface TextProps extends SRTextProps {
     preset?: TextVariants;

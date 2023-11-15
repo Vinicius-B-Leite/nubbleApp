@@ -1,12 +1,8 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native';
-import Box, { TouchableOpacityBox } from '../Box';
-import useAppSafeArea from '../../hook/useAppSafeArea';
-import { Icon } from '../Icon/Icon';
-import { Text } from '../Text';
-import { useAppTheme } from '../../hook/useAppTheme';
+import { KeyboardAvoidingView, Platform, ScrollView, } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { Icon, Text, Box, TouchableOpacityBox } from '@components'
+import { useAppSafeArea, useAppTheme } from '@hooks'
 
 
 type ScreenProps = {
@@ -15,7 +11,7 @@ type ScreenProps = {
     scrollEnabled?: boolean
 }
 
-const Screen: React.FC<ScreenProps> = ({ children, canGoBack = false, scrollEnabled = false }) => {
+export const Screen: React.FC<ScreenProps> = ({ children, canGoBack = false, scrollEnabled = false }) => {
     const { top, bottom } = useAppSafeArea()
     const { colors } = useAppTheme()
     const navigation = useNavigation()
@@ -40,4 +36,3 @@ const Screen: React.FC<ScreenProps> = ({ children, canGoBack = false, scrollEnab
     )
 }
 
-export default Screen;

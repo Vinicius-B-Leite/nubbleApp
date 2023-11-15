@@ -1,8 +1,6 @@
 import React from 'react';
-import Box, { TouchableOpacityBox, TouchableOpacityBoxProps } from '../Box';
-import { Text } from '../Text';
 import { ButtonPreset, buttonPreset } from './buttonPreset';
-import ActivityIndicator from '../ActivityIndicator';
+import { ActivityIndicator, Text, TouchableOpacityBoxProps, TouchableOpacityBox } from '@components';
 
 
 
@@ -15,7 +13,7 @@ type ButtonProps = TouchableOpacityBoxProps & {
     preset?: ButtonPreset
 }
 
-const Button: React.FC<ButtonProps> = ({ title, loading, preset = 'primary', disabled, ...rest }) => {
+export const Button: React.FC<ButtonProps> = ({ title, loading, preset = 'primary', disabled, ...rest }) => {
     const buttonPresetSelected = buttonPreset[preset][disabled ? 'disabled' : 'default']
     return (
         <TouchableOpacityBox
@@ -38,4 +36,3 @@ const Button: React.FC<ButtonProps> = ({ title, loading, preset = 'primary', dis
     )
 }
 
-export default Button;

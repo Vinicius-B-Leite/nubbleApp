@@ -1,13 +1,11 @@
 import React from 'react';
-import { Control, Controller, FieldValues, UseControllerProps } from 'react-hook-form';
-import { View } from 'react-native';
-import TextInput, { TextInputProps } from '../TextInput';
-
+import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
+import { TextInputProps, TextInput } from '@components'
 
 
 export type FormTextInputProps<T extends FieldValues> = TextInputProps & UseControllerProps<T>
 
-export default function FormTextInput<FormType extends FieldValues>({ control, name, rules, ...textInputProps }: FormTextInputProps<FormType>) {
+export function FormTextInput<FormType extends FieldValues>({ control, name, rules, ...textInputProps }: FormTextInputProps<FormType>) {
     return (
         <Controller
             control={control}

@@ -1,17 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
-import Screen from '../../../components/Screen/Screen';
-import { Text } from '../../../components/Text';
-import Button from '../../../components/Button';
-import { Icon } from '../../../components/Icon/Icon';
+import { Screen, Icon, Text, Button } from '@components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackParamsList } from '../../../routes/routes';
+import { StackParamsList } from '@routes';
 
 
 
 type SuccessProps = NativeStackScreenProps<StackParamsList, 'Success'>
 
-const Success: React.FC<SuccessProps> = ({ route, navigation }) => {
+export const Success: React.FC<SuccessProps> = ({ route, navigation }) => {
 
     const { description, icon, title } = route.params
 
@@ -30,5 +26,3 @@ const Success: React.FC<SuccessProps> = ({ route, navigation }) => {
         </Screen>
     )
 }
-
-export default Success;
