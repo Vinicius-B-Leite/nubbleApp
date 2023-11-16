@@ -52,7 +52,7 @@
 		}
 	],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": 0,
 		"quotes": ["error", "single"],
 		"semi": 0
