@@ -2,17 +2,14 @@ import React from 'react'
 import { Pressable } from 'react-native'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useForm } from 'react-hook-form'
 
 import { Text, Icon, Screen, FormTextInput, FormPasswordInput, Button } from '@components'
-import { StackParamsList } from '@routes'
+import { AuthScreenProps } from '@routes'
 
 import { LoginFormType, loginSchema } from './loginSchema'
 
-type LoginProps = NativeStackScreenProps<StackParamsList, 'Login'>
-
-export const Login: React.FC<LoginProps> = ({ navigation }) => {
+export const Login: React.FC<AuthScreenProps<'Login'>> = ({ navigation }) => {
 	const { control, formState, handleSubmit } = useForm<LoginFormType>({
 		resolver: zodResolver(loginSchema),
 
