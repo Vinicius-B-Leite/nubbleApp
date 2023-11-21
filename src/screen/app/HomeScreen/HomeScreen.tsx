@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Button, Screen, Text } from '@components'
-import { AppScreenProps } from '@routes'
+import { AppBottomTabScreenProps } from '@routes'
 
-export const HomeScreen: React.FC<AppScreenProps<'HomeScreen'>> = ({ navigation }) => {
+export const HomeScreen: React.FC<AppBottomTabScreenProps<'HomeScreen'>> = ({ navigation }) => {
 	return (
 		<Screen>
 			<Text>Home Screen</Text>

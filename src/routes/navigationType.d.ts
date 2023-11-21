@@ -1,6 +1,8 @@
+import { CompositeScreenProps } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { AppStackParamsList } from './appStack'
+import { AppTabParamsList } from './AppTabNavigator'
 import { AuthParamsList } from './authStack'
 
 declare global {
@@ -18,3 +20,9 @@ export type AuthScreenProps<RouteName extends keyof AuthParamsList> = NativeStac
 	AuthParamsList,
 	RouteName
 >
+
+export type AppBottomTabScreenProps<RouteName extends keyof AppTabParamsList> =
+	CompositeScreenProps<
+		BottomTabScreenProps<AppTabParamsList, RouteName>,
+		NativeStackScreenProps<AppStackParamsList, 'AppTabNavigator'>
+	>

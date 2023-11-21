@@ -1,4 +1,5 @@
-export * from './routes'
 export * from './appStack'
+export * from './AppTabNavigator'
 export * from './authStack'
 export * from './navigationType'
+export * from './routes'
