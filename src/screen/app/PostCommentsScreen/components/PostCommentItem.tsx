@@ -16,7 +16,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
 					{comment.author.userName}
 				</Text>
 				<Text preset="paragraphSmall" color="gray1">
-					{comment.message}
+					{comment.message} - {comment.createdAtRelative}
 				</Text>
 			</Box>
 		</Box>

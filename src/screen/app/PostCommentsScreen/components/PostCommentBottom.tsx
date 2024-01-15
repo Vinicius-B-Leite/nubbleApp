@@ -9,7 +9,7 @@ type PostCommentBottomProps = {
 }
 
 const PostCommentBottom: React.FC<PostCommentBottomProps> = ({ fetchNextPage, hasNextPage }) => {
-	if (!hasNextPage) return hasNextPage
+	if (!hasNextPage) return null
 	return (
 		<Pressable onPress={fetchNextPage}>
 			<Text bold textAlign="center" color="primary">

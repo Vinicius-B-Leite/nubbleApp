@@ -1,3 +1,5 @@
+import { dateUtils } from '@utils'
+
 import { PostComments, PostCommentsAPIResponse } from './postCommentsTypes'
 
 function parseToPostComments(postCommentsApi: PostCommentsAPIResponse): PostComments {
@@ -11,6 +13,7 @@ function parseToPostComments(postCommentsApi: PostCommentsAPIResponse): PostComm
 
 		id: String(postCommentsApi.id),
 		createdAt: postCommentsApi.created_at,
+		createdAtRelative: dateUtils.formatRelative(postCommentsApi.created_at),
 		message: postCommentsApi.message,
 	}
 }

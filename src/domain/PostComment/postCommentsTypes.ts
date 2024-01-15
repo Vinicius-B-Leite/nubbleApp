@@ -37,6 +37,7 @@ export type PostComments = {
 		userName: string
 	}
 	createdAt: string
+	createdAtRelative: string
 	message: string
 	id: string
 }
