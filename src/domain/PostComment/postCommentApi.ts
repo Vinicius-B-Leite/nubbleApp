@@ -18,6 +18,16 @@ async function getList(params: Props): Promise<PostCommentsResponse> {
 	return response.data
 }
 
+async function create(postId: number, message: string): Promise<PostCommentsAPIResponse> {
+	const response = await api.post('user/post_comment', {
+		post_id: postId,
+		message: message,
+	})
+
+	return response.data
+}
+
 export const postCommentsApi = {
 	getList,
+	create,
 }

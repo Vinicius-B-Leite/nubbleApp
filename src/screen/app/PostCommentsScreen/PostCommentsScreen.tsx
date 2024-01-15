@@ -3,17 +3,18 @@ import { FlatList } from 'react-native'
 
 import { useCommentsList } from '@domain'
 
-import { Box, Screen, TextMessage } from '@components'
+import { Box, Screen } from '@components'
 import { useAppSafeArea } from '@hooks'
 import { AppScreenProps } from '@routes'
 
 import PostCommentBottom from './components/PostCommentBottom'
 import PostCommentItem from './components/PostCommentItem'
+import PostCommentTextMessage from './components/PostCommentTextMessage'
 
 export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>) {
 	const { postId } = route.params
 	const { bottom } = useAppSafeArea()
-	const { postList: list, fetchNextPage, hasNextPage } = useCommentsList(postId)
+	const { postList: list, fetchNextPage, hasNextPage, refetch } = useCommentsList(postId)
 
 	return (
 		<Screen flex={1} title="Comentários" canGoBack>
@@ -29,7 +30,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					showsVerticalScrollIndicator={false}
 				/>
 
-				<TextMessage value="asdas" placeholder="Adicione um comentário" onPressSend={() => {}} />
+				<PostCommentTextMessage postId={postId} onAddComment={refetch} />
 			</Box>
 		</Screen>
 	)

@@ -18,6 +18,13 @@ async function getList({ page, postId }: Props): Promise<Page<PostComments>> {
 	}
 }
 
+async function create(postId: number, message: string): Promise<PostComments> {
+	const response = await postCommentsApi.create(postId, message)
+
+	return postCommentsAdapter.parseToPostComments(response)
+}
+
 export const postCommentsService = {
 	getList,
+	create,
 }
