@@ -8,10 +8,10 @@ type Props = PageParams & {
 	post_id: number
 }
 
-async function getList(params: Props): Promise<PostCommentsResponse> {
-	const url = 'user/post_comment'
+const PATH = 'user/post_comment'
 
-	const response = await api.get<PostCommentsResponse>(url, {
+async function getList(params: Props): Promise<PostCommentsResponse> {
+	const response = await api.get<PostCommentsResponse>(PATH, {
 		params,
 	})
 
@@ -19,7 +19,7 @@ async function getList(params: Props): Promise<PostCommentsResponse> {
 }
 
 async function create(postId: number, message: string): Promise<PostCommentsAPIResponse> {
-	const response = await api.post('user/post_comment', {
+	const response = await api.post(PATH, {
 		post_id: postId,
 		message: message,
 	})
@@ -27,7 +27,14 @@ async function create(postId: number, message: string): Promise<PostCommentsAPIR
 	return response.data
 }
 
+async function remove(commentId: number): Promise<{ message: string }> {
+	const response = await api.delete<{ message: string }>(`${PATH}/${commentId}`)
+
+	return response.data
+}
+
 export const postCommentsApi = {
 	getList,
 	create,
+	remove,
 }
