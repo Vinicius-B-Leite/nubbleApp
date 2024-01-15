@@ -1,7 +1,6 @@
 import React from 'react'
-import { Image } from 'react-native'
 
-import { Box, Text } from '@components'
+import { Box, ProfileAvatar, Text } from '@components'
 
 type PostHeaderProps = {
 	profileURL: string
@@ -11,7 +10,7 @@ type PostHeaderProps = {
 const PostHeader: React.FC<PostHeaderProps> = ({ profileURL, userName }) => {
 	return (
 		<Box flexDirection="row" alignItems="center" mb="s16">
-			<Image source={{ uri: profileURL }} style={{ width: 32, height: 32, borderRadius: 14 }} />
+			<ProfileAvatar profileURL={profileURL} />
 			<Text preset="paragraphMedium" semiBold ml="s12">
 				{userName}
 			</Text>

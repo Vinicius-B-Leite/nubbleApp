@@ -9,11 +9,12 @@ function parseToPost(postApi: PostAPI): Post {
 			name: postApi.user.full_name,
 			profileURL: postApi.user.profile_url,
 			userName: postApi.user.username,
+			id: postApi.user.id,
 		},
 		commentCount: parseInt(postApi.meta.comments_count, 10),
 		favoriteCount: parseInt(postApi.meta.favorite_count, 10),
 		reactionCount: parseInt(postApi.meta.like_count, 10),
-		id: String(postApi.id),
+		id: postApi.id,
 		imageURL: postApi.image_url,
 		text: postApi.text,
 	}

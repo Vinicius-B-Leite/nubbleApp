@@ -14,3 +14,8 @@ export type PaginationAPIResponse<T> = {
 	data: T[]
 	meta: MetaDataPageAPI
 }
+
+export type PageParams = {
+	page?: number
+	per_page?: number
+}

@@ -1,27 +1,27 @@
 import React from 'react'
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
-
-import { Icon, Text, Box, TouchableOpacityBox, BoxProps } from '@components'
+import { Box, BoxProps } from '@components'
 import { useAppSafeArea, useAppTheme } from '@hooks'
 
-type ScreenProps = BoxProps & {
-	children: React.ReactNode
-	canGoBack?: boolean
-	scrollEnabled?: boolean
-}
+import ScreenHeader, { ScreenHeaderProps } from './components/ScreenHeader'
+
+type ScreenProps = BoxProps &
+	ScreenHeaderProps & {
+		children: React.ReactNode
+		scrollEnabled?: boolean
+	}
 
 export const Screen: React.FC<ScreenProps> = ({
 	children,
 	canGoBack = false,
 	scrollEnabled = false,
 	style,
+	title,
 	...boxProps
 }) => {
 	const { top, bottom } = useAppSafeArea()
 	const { colors } = useAppTheme()
-	const navigation = useNavigation()
 
 	const Container = scrollEnabled ? ScrollView : View
 
@@ -40,14 +40,7 @@ export const Screen: React.FC<ScreenProps> = ({
 					style={[{ paddingTop: top, paddingBottom: bottom }, style]}
 					{...boxProps}
 				>
-					{canGoBack && (
-						<TouchableOpacityBox mb="s24" flexDirection="row" onPress={navigation.goBack}>
-							<Icon name="arrowLeft" color="primary" />
-							<Text preset="paragraphMedium" semiBold ml="s8">
-								Voltar
-							</Text>
-						</TouchableOpacityBox>
-					)}
+					<ScreenHeader canGoBack={canGoBack} title={title} />
 					{children}
 				</Box>
 			</Container>
