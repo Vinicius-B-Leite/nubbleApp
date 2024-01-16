@@ -25,7 +25,12 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					keyExtractor={({ id }) => id.toString()}
 					contentContainerStyle={{ paddingBottom: bottom }}
 					renderItem={({ item }) => (
-						<PostCommentItem userId={userId} postAuthorId={postAuthorId} comment={item} />
+						<PostCommentItem
+							onEndDelete={refetch}
+							userId={userId}
+							postAuthorId={postAuthorId}
+							comment={item}
+						/>
 					)}
 					ListFooterComponent={
 						<PostCommentBottom hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />

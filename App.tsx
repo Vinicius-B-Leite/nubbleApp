@@ -8,8 +8,6 @@ import { Toast } from '@components'
 import Router from './src/routes/routes'
 import { theme } from './src/theme/theme'
 
-// import { Container } from './styles';
-
 const App: React.FC = () => {
 	return (
 		<ThemeProvider theme={theme}>
