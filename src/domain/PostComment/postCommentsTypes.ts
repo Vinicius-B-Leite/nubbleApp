@@ -31,7 +31,7 @@ export type PostCommentsAPIResponse = {
 
 export type PostComments = {
 	author: {
-		id: string
+		id: number
 		profileURL: string
 		name: string
 		userName: string
@@ -39,5 +39,5 @@ export type PostComments = {
 	createdAt: string
 	createdAtRelative: string
 	message: string
-	id: string
+	id: number
 }

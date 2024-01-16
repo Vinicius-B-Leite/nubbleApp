@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import { useCommentsList } from '@domain'
+import { useCommentsList, useUser } from '@domain'
 
 import { Box, Screen } from '@components'
 import { useAppSafeArea } from '@hooks'
@@ -12,8 +12,9 @@ import PostCommentItem from './components/PostCommentItem'
 import PostCommentTextMessage from './components/PostCommentTextMessage'
 
 export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>) {
-	const { postId } = route.params
+	const { postId, postAuthorId } = route.params
 	const { bottom } = useAppSafeArea()
+	const { userId } = useUser()
 	const { postList: list, fetchNextPage, hasNextPage, refetch } = useCommentsList(postId)
 
 	return (
@@ -21,9 +22,11 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 			<Box flex={1} justifyContent="space-between">
 				<FlatList
 					data={list}
-					keyExtractor={({ id }) => id}
+					keyExtractor={({ id }) => id.toString()}
 					contentContainerStyle={{ paddingBottom: bottom }}
-					renderItem={({ item }) => <PostCommentItem comment={item} />}
+					renderItem={({ item }) => (
+						<PostCommentItem userId={userId} postAuthorId={postAuthorId} comment={item} />
+					)}
 					ListFooterComponent={
 						<PostCommentBottom hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
 					}

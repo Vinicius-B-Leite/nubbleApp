@@ -1,4 +1,4 @@
-import { usePaginationList } from '@domain'
+import { usePaginationList } from '@infra'
 
 import { postService } from '../postService'
 import { Post } from '../postTypes'
