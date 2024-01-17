@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Post } from '@domain'
+import { useNavigation } from '@react-navigation/native'
 
 import { Box } from '../Box'
 
@@ -14,11 +15,15 @@ type PostProps = {
 }
 
 export function PostItem({ post }: PostProps) {
-	console.log(post)
+	const navition = useNavigation()
+
+	const navigateToProfile = () => {
+		navition.navigate('ProfileScreen', { userId: post.author.id })
+	}
 
 	return (
 		<Box marginBottom="s24" paddingHorizontal="s24">
-			<PostHeader {...post.author} />
+			<PostHeader onPress={navigateToProfile} {...post.author} />
 			<PostImage imageURL={post.imageURL} />
 			<PostActions {...post} />
 			<PostBottom {...post} />
