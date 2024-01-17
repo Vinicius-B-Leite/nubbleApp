@@ -11,7 +11,7 @@ import HomeEmpty from './components/HomeEmpty'
 import HomeHeader from './components/HomeHeader'
 
 export const HomeScreen: React.FC<AppBottomTabScreenProps<'HomeScreen'>> = () => {
-	const { error, isLoading, postList, fetchNextPage, refetch } = usePostList()
+	const { isError, isLoading, dataList: postList, fetchNextPage, refetch } = usePostList()
 	const listRef = useRef<FlatList>(null)
 
 	useScrollToTop(listRef)
@@ -28,7 +28,7 @@ export const HomeScreen: React.FC<AppBottomTabScreenProps<'HomeScreen'>> = () =>
 				refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
 				refreshing={isLoading}
 				renderItem={({ item }) => <PostItem post={item} />}
-				ListEmptyComponent={<HomeEmpty error={error} isLoading={isLoading} />}
+				ListEmptyComponent={<HomeEmpty error={isError} isLoading={isLoading} />}
 				showsVerticalScrollIndicator={false}
 			/>
 		</Screen>

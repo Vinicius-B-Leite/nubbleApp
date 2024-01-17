@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, ProfileAvatar, Text, TouchableOpacityBox } from '@components'
+import { ProfileAvatar, Text, TouchableOpacityBox } from '@components'
 
 type PostHeaderProps = {
 	profileURL: string
