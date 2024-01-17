@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import { useCommentsList, useUser } from '@domain'
+import { useCommentsList, useUserGetById } from '@domain'
 
 import { Box, Screen } from '@components'
 import { useAppSafeArea } from '@hooks'
@@ -14,7 +14,7 @@ import PostCommentTextMessage from './components/PostCommentTextMessage'
 export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>) {
 	const { postId, postAuthorId } = route.params
 	const { bottom } = useAppSafeArea()
-	const { userId } = useUser()
+	const { user } = useUserGetById(1)
 	const { postList: list, fetchNextPage, hasNextPage, refetch } = useCommentsList(postId)
 
 	return (
@@ -27,7 +27,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					renderItem={({ item }) => (
 						<PostCommentItem
 							onEndDelete={refetch}
-							userId={userId}
+							userId={user?.id || 1}
 							postAuthorId={postAuthorId}
 							comment={item}
 						/>

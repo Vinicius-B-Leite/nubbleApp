@@ -1,4 +1,4 @@
-export * from './Auth'
+export * from './User'
 
 export * from './Post/useCase/usePostList'
 export * from './Post/postService'
