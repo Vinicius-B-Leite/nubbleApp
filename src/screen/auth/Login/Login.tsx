@@ -1,7 +1,9 @@
 import React from 'react'
 import { Pressable } from 'react-native'
 
+import { useAuthSignIn } from '@domain'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useToastService } from '@services'
 import { useForm } from 'react-hook-form'
 
 import { Text, Icon, Screen, FormTextInput, FormPasswordInput, Button } from '@components'
@@ -10,6 +12,7 @@ import { AuthScreenProps } from '@routes'
 import { LoginFormType, loginSchema } from './loginSchema'
 
 export const Login: React.FC<AuthScreenProps<'Login'>> = ({ navigation }) => {
+	const { showToast } = useToastService()
 	const { control, formState, handleSubmit } = useForm<LoginFormType>({
 		resolver: zodResolver(loginSchema),
 
@@ -22,8 +25,17 @@ export const Login: React.FC<AuthScreenProps<'Login'>> = ({ navigation }) => {
 		mode: 'onChange',
 	})
 
+	const { isLoading, signIn } = useAuthSignIn({
+		onError: (errorMessage) => {
+			showToast({
+				message: errorMessage,
+				type: 'error',
+			})
+		},
+	})
+
 	const submitForm = (values: LoginFormType) => {
-		console.log(values)
+		signIn({ email: values.email, password: values.password })
 	}
 
 	return (
@@ -65,6 +77,7 @@ export const Login: React.FC<AuthScreenProps<'Login'>> = ({ navigation }) => {
 				title="Entrar"
 				onPress={handleSubmit(submitForm)}
 				disabled={!formState.isValid}
+				loading={isLoading}
 			/>
 
 			<Button

@@ -6,7 +6,7 @@ import AppStack from './appStack'
 import AuthStack from './authStack'
 
 const Router: React.FC = () => {
-	const isLogin = true
+	const isLogin = false
 	return <NavigationContainer>{isLogin ? <AppStack /> : <AuthStack />}</NavigationContainer>
 }
 
