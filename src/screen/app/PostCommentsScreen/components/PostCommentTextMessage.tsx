@@ -7,25 +7,20 @@ import { TextMessage } from '@components'
 
 type PostCommentTextMessageProps = {
 	postId: number
-	onAddComment: () => void
 }
 
-const PostCommentTextMessage: React.FC<PostCommentTextMessageProps> = ({
-	postId,
-	onAddComment,
-}) => {
+const PostCommentTextMessage: React.FC<PostCommentTextMessageProps> = ({ postId }) => {
 	const { createComment } = usePostCommentsCreate(postId, {
 		onSuccess: () => {
 			setMessage('')
 			Keyboard.dismiss()
-			onAddComment()
 		},
 	})
 
 	const [message, setMessage] = useState('')
 
-	const handleSendMessage = async () => {
-		await createComment(message)
+	const handleSendMessage = () => {
+		createComment(message)
 	}
 
 	return (

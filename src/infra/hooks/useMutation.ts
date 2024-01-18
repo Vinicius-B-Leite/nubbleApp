@@ -5,6 +5,11 @@ export type MutateOptions<TData> = {
 	onError?: (errorMessage: string) => void
 	errorMessage?: string
 }
+
+/**
+ *
+ * @deprecated use useMutation from react query
+ */
 export function useMutation<TVariables, TData>(
 	mutationFn: (props: TVariables) => Promise<TData>,
 	options?: MutateOptions<TData>

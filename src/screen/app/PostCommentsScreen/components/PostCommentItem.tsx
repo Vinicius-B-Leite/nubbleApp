@@ -10,19 +10,12 @@ type PostCommentItemProps = {
 	comment: PostComments
 	userId: number
 	postAuthorId: number
-	onEndDelete: () => void
 }
-const PostCommentItem: React.FC<PostCommentItemProps> = ({
-	comment,
-	postAuthorId,
-	userId,
-	onEndDelete,
-}) => {
+const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment, postAuthorId, userId }) => {
 	const { showToast } = useToastService()
 	const { mutate } = usePostCommentRemove({
 		onSuccess: () => {
 			showToast({ message: 'Deletado com sucesso!' })
-			onEndDelete()
 		},
 	})
 	const isAllowToDelete = postCommentsService.isAllowToDeleteComment(comment, userId, postAuthorId)

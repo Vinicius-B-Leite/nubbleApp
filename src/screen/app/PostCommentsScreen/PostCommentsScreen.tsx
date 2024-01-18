@@ -15,7 +15,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 	const { postId, postAuthorId } = route.params
 	const { bottom } = useAppSafeArea()
 	const { user } = useUserGetById(1)
-	const { postList: list, fetchNextPage, hasNextPage, refetch } = useCommentsList(postId)
+	const { dataList: list, fetchNextPage, hasNextPage } = useCommentsList(postId)
 
 	return (
 		<Screen flex={1} title="Comentários" canGoBack>
@@ -25,12 +25,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					keyExtractor={({ id }) => id.toString()}
 					contentContainerStyle={{ paddingBottom: bottom }}
 					renderItem={({ item }) => (
-						<PostCommentItem
-							onEndDelete={refetch}
-							userId={user?.id || 1}
-							postAuthorId={postAuthorId}
-							comment={item}
-						/>
+						<PostCommentItem userId={user?.id || 1} postAuthorId={postAuthorId} comment={item} />
 					)}
 					ListFooterComponent={
 						<PostCommentBottom hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
@@ -38,7 +33,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					showsVerticalScrollIndicator={false}
 				/>
 
-				<PostCommentTextMessage postId={postId} onAddComment={refetch} />
+				<PostCommentTextMessage postId={postId} />
 			</Box>
 		</Screen>
 	)

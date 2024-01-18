@@ -4,7 +4,7 @@ import { Pressable } from 'react-native'
 import { Text } from '@components'
 
 type PostCommentBottomProps = {
-	fetchNextPage: () => Promise<void>
+	fetchNextPage: () => void
 	hasNextPage: boolean
 }
 

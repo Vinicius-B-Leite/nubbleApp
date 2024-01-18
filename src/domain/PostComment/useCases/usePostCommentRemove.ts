@@ -1,10 +1,24 @@
-import { MutateOptions, useMutation } from '@infra'
+import { MutateOptions, QueryKeys } from '@infra'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { postCommentsService } from '../postCommentService'
 
 export function usePostCommentRemove(options?: MutateOptions<string>) {
-	return useMutation<{ commentId: number }, string>(
-		({ commentId }) => postCommentsService.remove(commentId),
-		options
-	)
+	const queryClient = useQueryClient()
+	return useMutation<string, unknown, { commentId: number }>({
+		mutationFn: ({ commentId }) => postCommentsService.remove(commentId),
+		onSuccess: (data) => {
+			queryClient.invalidateQueries({
+				queryKey: [QueryKeys.PostCommentList],
+			})
+			if (options?.onSuccess) {
+				options.onSuccess(data)
+			}
+		},
+		onError: () => {
+			if (options?.onError) {
+				options.onError(options?.errorMessage || 'Ocorreu um error')
+			}
+		},
+	})
 }
