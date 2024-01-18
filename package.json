@@ -9,7 +9,7 @@
 		"start": "react-native start --reset-cache",
 		"test": "jest",
 		"prepare": "husky install",
-		"adb-reverse": "adb reverse tcp:55025 tcp:55025"
+		"adb-reverse": "adb reverse tcp:62599 tcp:62599"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.2",
