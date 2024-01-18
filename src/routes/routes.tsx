@@ -8,7 +8,7 @@ import AuthStack from './authStack'
 
 const Router: React.FC = () => {
 	const { auth } = useAuthCredentialsZustand()
-	return <NavigationContainer>{auth ? <AppStack /> : <AuthStack />}</NavigationContainer>
+	return <NavigationContainer>{!auth ? <AppStack /> : <AuthStack />}</NavigationContainer>
 }
 
 export default Router
