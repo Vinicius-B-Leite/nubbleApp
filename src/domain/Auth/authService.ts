@@ -2,7 +2,7 @@ import { api } from '@api'
 
 import { authAdapter } from './authAdapter'
 import { authApi } from './authApi'
-import { AuthCredentials } from './authTypes'
+import { AuthCredentials, SignUpData } from './authTypes'
 
 async function signIn(email: string, password: string): Promise<AuthCredentials> {
 	try {
@@ -25,9 +25,13 @@ function removeToken() {
 	api.defaults.headers.common.Authorization = null
 }
 
+async function signUp(signUpData: SignUpData): Promise<void> {
+	await authApi.signUp(signUpData)
+}
 export const authService = {
 	signIn,
 	signOut,
 	updateToken,
 	removeToken,
+	signUp,
 }
