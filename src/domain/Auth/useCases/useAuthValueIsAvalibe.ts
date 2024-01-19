@@ -7,9 +7,10 @@ import { authService } from '../authService'
 
 type UseAuthIsAvalibeProps = {
 	username: string
+	enabled?: boolean | undefined
 }
 
-export function useAuthIsAvalibe({ username }: UseAuthIsAvalibeProps) {
+export function useAuthIsAvalibe({ username, enabled }: UseAuthIsAvalibeProps) {
 	const debouncedUsername = useDebounce(username, 1500)
 
 	const { data, isFetching } = useQuery({
@@ -17,10 +18,12 @@ export function useAuthIsAvalibe({ username }: UseAuthIsAvalibeProps) {
 		queryFn: () => authService.isUserNameAvailable(debouncedUsername),
 		retry: false,
 		staleTime: 1000 * 20,
+		enabled,
 	})
 
+	const isDebouncing = debouncedUsername !== username
 	return {
 		isAvalibe: !!data,
-		isFetching,
+		isFetching: isDebouncing || isFetching,
 	}
 }

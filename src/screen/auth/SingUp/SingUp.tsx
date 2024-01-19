@@ -30,7 +30,7 @@ export const SingUp: React.FC = () => {
 		},
 	})
 	const { navigateToSucess } = useResetNavigationSuccess()
-	const { control, formState, handleSubmit, watch } = useForm<SingupSchema>({
+	const { control, formState, handleSubmit, watch, getFieldState } = useForm<SingupSchema>({
 		resolver: zodResolver(signUpSchema),
 		defaultValues: {
 			email: '',
@@ -42,7 +42,10 @@ export const SingUp: React.FC = () => {
 		mode: 'onChange',
 	})
 
-	const usernameQuery = useAuthIsAvalibe({ username: watch('username') })
+	const username = watch('username')
+	const usernameenabled =
+		!getFieldState('username').invalid && getFieldState('username').isDirty && username.length > 0
+	const usernameQuery = useAuthIsAvalibe({ username, enabled: usernameenabled })
 
 	const handleSingUp = (formData: SingupSchema) => {
 		signUp(formData)
@@ -103,7 +106,7 @@ export const SingUp: React.FC = () => {
 			/>
 
 			<Button
-				disabled={!formState.isValid}
+				disabled={!formState.isValid || usernameQuery.isAvalibe}
 				loading={isLoading}
 				title="Criar uma conta"
 				onPress={handleSubmit(handleSingUp)}
