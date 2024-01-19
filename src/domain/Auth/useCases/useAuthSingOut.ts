@@ -9,7 +9,6 @@ export function useAuthSignOut() {
 		mutationFn: authService.signOut,
 		retry: false,
 		onSuccess: () => {
-			authService.removeToken()
 			removeAuthCredentials()
 		},
 	})

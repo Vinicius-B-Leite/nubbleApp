@@ -1,6 +1,8 @@
 export * from './Auth/useCases/useAuthSingIn'
 export * from './Auth/useCases/useAuthSingOut'
 export * from './Auth/authTypes'
+export * from './Auth/authService'
+
 export * from './User'
 
 export * from './Post/useCase/usePostList'

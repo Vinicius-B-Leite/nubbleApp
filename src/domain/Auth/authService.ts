@@ -19,7 +19,7 @@ async function signOut(): Promise<string> {
 }
 
 function updateToken(token: string) {
-	api.defaults.headers.common.Authorization = token
+	api.defaults.headers.common.Authorization = 'Bearer ' + token
 }
 function removeToken() {
 	api.defaults.headers.common.Authorization = null

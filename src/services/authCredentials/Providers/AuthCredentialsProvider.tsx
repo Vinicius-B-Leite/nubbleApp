@@ -1,7 +1,9 @@
-import { createContext, useState } from 'react'
+import React from 'react'
+import { createContext, useEffect, useState } from 'react'
 
-import { AuthCredentials } from '@domain'
+import { AuthCredentials, authService } from '@domain'
 
+import { authStorage } from '../authCredentialsStorage'
 import { AuthCredentialsService } from '../authCredentialsTypes'
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
@@ -15,11 +17,33 @@ export const AuthCredentialsProvider = ({ children }: React.PropsWithChildren) =
 	const [auth, setAuth] = useState<null | AuthCredentials>(null)
 	const [isLoading, setIsLoading] = useState(true)
 
+	const startAuthCredentials = async () => {
+		try {
+			const ac = await authStorage.getAuth()
+			if (ac) {
+				authService.updateToken(ac.token)
+				setAuth(ac)
+			}
+		} catch (error) {
+			// TODO:
+		} finally {
+			setIsLoading(false)
+		}
+	}
+	useEffect(() => {
+		startAuthCredentials()
+	}, [])
+
 	const removeAuthCredentials = async () => {
+		await authStorage.removeAuth()
+		authService.removeToken()
 		setAuth(null)
 	}
 
 	const saveAuthCredentials = async (ac: AuthCredentials) => {
+		authService.updateToken(ac.token)
+		await authStorage.saveAuth(ac)
+
 		setAuth(ac)
 	}
 
