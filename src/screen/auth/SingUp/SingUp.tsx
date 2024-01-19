@@ -61,6 +61,7 @@ export const SingUp: React.FC = () => {
 				label="Seu username"
 				name="username"
 				placeholder="@"
+				errorMessage={usernameQuery.isUnvalibe ? 'Username já existe' : undefined}
 				RightComponent={usernameQuery.isFetching ? <ActivityIndicator size={'small'} /> : undefined}
 				boxProps={{
 					mb: 's20',
@@ -106,7 +107,7 @@ export const SingUp: React.FC = () => {
 			/>
 
 			<Button
-				disabled={!formState.isValid || usernameQuery.isAvalibe}
+				disabled={!formState.isValid || usernameQuery.isUnvalibe || usernameQuery.isFetching}
 				loading={isLoading}
 				title="Criar uma conta"
 				onPress={handleSubmit(handleSingUp)}

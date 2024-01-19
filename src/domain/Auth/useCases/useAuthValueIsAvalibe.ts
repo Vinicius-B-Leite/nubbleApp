@@ -24,6 +24,7 @@ export function useAuthIsAvalibe({ username, enabled }: UseAuthIsAvalibeProps) {
 	const isDebouncing = debouncedUsername !== username
 	return {
 		isAvalibe: !!data,
+		isUnvalibe: data === false,
 		isFetching: isDebouncing || isFetching,
 	}
 }
