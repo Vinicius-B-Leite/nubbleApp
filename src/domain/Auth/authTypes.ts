@@ -33,3 +33,8 @@ export interface SignUpData {
 	email: string
 	password: string
 }
+
+export interface FieldIsAvailableAPI {
+	message: string
+	isAvailable: boolean
+}

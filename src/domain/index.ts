@@ -1,6 +1,7 @@
 export * from './Auth/useCases/useAuthSingIn'
 export * from './Auth/useCases/useAuthSingOut'
 export * from './Auth/useCases/useAuthSingUp'
+export * from './Auth/useCases/useAuthValueIsAvalibe'
 export * from './Auth/authTypes'
 export * from './Auth/authService'
 

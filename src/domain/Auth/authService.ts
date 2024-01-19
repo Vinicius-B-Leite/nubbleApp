@@ -28,10 +28,22 @@ function removeToken() {
 async function signUp(signUpData: SignUpData): Promise<void> {
 	await authApi.signUp(signUpData)
 }
+
+async function isUserNameAvailable(username: string): Promise<boolean> {
+	const { isAvailable } = await authApi.isUserNameAvailable({ username })
+	return isAvailable
+}
+async function isEmailAvailable(email: string): Promise<boolean> {
+	const { isAvailable } = await authApi.isEmailAvailable({ email })
+	return isAvailable
+}
+
 export const authService = {
 	signIn,
 	signOut,
 	updateToken,
 	removeToken,
 	signUp,
+	isUserNameAvailable,
+	isEmailAvailable,
 }

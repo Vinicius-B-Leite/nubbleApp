@@ -1,10 +1,17 @@
 import React from 'react'
 
-import { useAuthSignUp } from '@domain'
+import { useAuthIsAvalibe, useAuthSignUp } from '@domain'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { Screen, Text, FormTextInput, FormPasswordInput, Button } from '@components'
+import {
+	Screen,
+	Text,
+	FormTextInput,
+	FormPasswordInput,
+	Button,
+	ActivityIndicator,
+} from '@components'
 import { useResetNavigationSuccess } from '@hooks'
 
 import { signUpSchema, SingupSchema } from './singupSchema'
@@ -23,7 +30,7 @@ export const SingUp: React.FC = () => {
 		},
 	})
 	const { navigateToSucess } = useResetNavigationSuccess()
-	const { control, formState, handleSubmit } = useForm<SingupSchema>({
+	const { control, formState, handleSubmit, watch } = useForm<SingupSchema>({
 		resolver: zodResolver(signUpSchema),
 		defaultValues: {
 			email: '',
@@ -34,6 +41,9 @@ export const SingUp: React.FC = () => {
 		},
 		mode: 'onChange',
 	})
+
+	const usernameQuery = useAuthIsAvalibe({ username: watch('username') })
+
 	const handleSingUp = (formData: SingupSchema) => {
 		signUp(formData)
 	}
@@ -48,6 +58,7 @@ export const SingUp: React.FC = () => {
 				label="Seu username"
 				name="username"
 				placeholder="@"
+				RightComponent={usernameQuery.isFetching ? <ActivityIndicator size={'small'} /> : undefined}
 				boxProps={{
 					mb: 's20',
 				}}
