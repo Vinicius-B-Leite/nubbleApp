@@ -22,8 +22,10 @@ export function useAuthSignIn(options?: MutateOptions<AuthCredentials>) {
 			}
 		},
 		onSuccess: (authCredentiasl) => {
-			authService.updateToken(authCredentiasl.token)
+			console.log('aue')
+
 			saveAuthCredentials({ token: authCredentiasl.token, user: authCredentiasl.user })
+			authService.updateToken('Bearer ' + authCredentiasl.token)
 		},
 	})
 
