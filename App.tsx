@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { AuthCredentialsProvider } from '@services'
 import { ThemeProvider } from '@shopify/restyle'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -16,8 +17,10 @@ const App: React.FC = () => {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider theme={theme}>
 				<SafeAreaProvider>
-					<Router />
-					<Toast />
+					<AuthCredentialsProvider>
+						<Router />
+						<Toast />
+					</AuthCredentialsProvider>
 				</SafeAreaProvider>
 			</ThemeProvider>
 		</QueryClientProvider>
