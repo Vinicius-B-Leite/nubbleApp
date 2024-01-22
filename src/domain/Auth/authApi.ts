@@ -2,7 +2,12 @@ import { api } from '@api'
 
 import { UserAPI } from '../User'
 
-import { AuthCredentialsAPI, FieldIsAvailableAPI, SignUpDataAPI } from './authTypes'
+import {
+	AuthCredentialsAPI,
+	FieldIsAvailableAPI,
+	ForgotPasswordParam,
+	SignUpDataAPI,
+} from './authTypes'
 
 async function signIn(email: string, password: string): Promise<AuthCredentialsAPI> {
 	const response = await api.post<AuthCredentialsAPI>('login', {
@@ -38,10 +43,17 @@ async function isEmailAvailable(params: { email: string }): Promise<FieldIsAvail
 	return response.data
 }
 
+async function forgotPassword(params: ForgotPasswordParam): Promise<{ message: string }> {
+	const response = await api.post<{ message: string }>('forgot-password', params)
+
+	return response.data
+}
+
 export const authApi = {
 	signIn,
 	signOut,
 	signUp,
 	isUserNameAvailable,
 	isEmailAvailable,
+	forgotPassword,
 }
