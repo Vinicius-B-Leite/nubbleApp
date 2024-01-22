@@ -43,6 +43,10 @@ async function requestNewPassword(email: string): Promise<string> {
 	return message
 }
 
+async function refreshToken(refreshToken: string): Promise<AuthCredentials> {
+	const authCredentialsAPI = await authApi.refreshToken(refreshToken)
+	return authAdapter.toAuthCredentials(authCredentialsAPI)
+}
 export const authService = {
 	signIn,
 	signOut,
@@ -52,4 +56,5 @@ export const authService = {
 	isUserNameAvailable,
 	isEmailAvailable,
 	requestNewPassword,
+	refreshToken,
 }

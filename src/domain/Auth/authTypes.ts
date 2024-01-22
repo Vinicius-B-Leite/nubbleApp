@@ -2,13 +2,17 @@ import { User, UserAPI } from '../User'
 
 export interface AuthCredentials {
 	token: string
+	refreshToken: string
+	tokenExpiresAt: string
 	user: User
 }
 
 export interface AuthCredentialsAPI {
 	auth: {
 		type: string //'bearer';
+		refreshToken: string
 		token: string // 'NA.GCfDf81QRs0q4VxyFSEvWs8kZ-DoZnl5zKLn8UDY8ntedjZCPgxVxfFijlQy';
+		expires_at: string
 	}
 	user: UserAPI
 }

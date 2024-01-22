@@ -49,6 +49,13 @@ async function forgotPassword(params: ForgotPasswordParam): Promise<{ message: s
 	return response.data
 }
 
+async function refreshToken(token: string): Promise<AuthCredentialsAPI> {
+	const response = await api.post('auth/refresh-token', {
+		refreshToken: token,
+	})
+
+	return response.data
+}
 export const authApi = {
 	signIn,
 	signOut,
@@ -56,4 +63,5 @@ export const authApi = {
 	isUserNameAvailable,
 	isEmailAvailable,
 	forgotPassword,
+	refreshToken,
 }
