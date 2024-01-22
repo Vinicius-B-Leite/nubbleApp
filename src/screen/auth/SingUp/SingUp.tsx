@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useAuthIsAvalibe, useAuthSignUp } from '@domain'
+import { useAuthSignUp } from '@domain'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
@@ -15,6 +15,7 @@ import {
 import { useResetNavigationSuccess } from '@hooks'
 
 import { signUpSchema, SingupSchema } from './singupSchema'
+import { useAsyncValidation } from './useAsyncValidation'
 
 export const SingUp: React.FC = () => {
 	const { isLoading, signUp } = useAuthSignUp({
@@ -42,10 +43,7 @@ export const SingUp: React.FC = () => {
 		mode: 'onChange',
 	})
 
-	const username = watch('username')
-	const usernameenabled =
-		!getFieldState('username').invalid && getFieldState('username').isDirty && username.length > 0
-	const usernameQuery = useAuthIsAvalibe({ username, enabled: usernameenabled })
+	const { emailValidation, usernameValidation } = useAsyncValidation({ watch, getFieldState })
 
 	const handleSingUp = (formData: SingupSchema) => {
 		signUp(formData)
@@ -61,8 +59,10 @@ export const SingUp: React.FC = () => {
 				label="Seu username"
 				name="username"
 				placeholder="@"
-				errorMessage={usernameQuery.isUnvalibe ? 'Username já existe' : undefined}
-				RightComponent={usernameQuery.isFetching ? <ActivityIndicator size={'small'} /> : undefined}
+				errorMessage={usernameValidation.errorMessage}
+				RightComponent={
+					usernameValidation.isLoading ? <ActivityIndicator size={'small'} /> : undefined
+				}
 				boxProps={{
 					mb: 's20',
 				}}
@@ -91,6 +91,10 @@ export const SingUp: React.FC = () => {
 				name="email"
 				label="Email"
 				placeholder="Digie seu email"
+				errorMessage={emailValidation.errorMessage}
+				RightComponent={
+					emailValidation.isLoading ? <ActivityIndicator size={'small'} /> : undefined
+				}
 				boxProps={{
 					mb: 's20',
 				}}
@@ -107,7 +111,7 @@ export const SingUp: React.FC = () => {
 			/>
 
 			<Button
-				disabled={!formState.isValid || usernameQuery.isUnvalibe || usernameQuery.isFetching}
+				disabled={!formState.isValid || usernameValidation.notReady || emailValidation.notReady}
 				loading={isLoading}
 				title="Criar uma conta"
 				onPress={handleSubmit(handleSingUp)}
