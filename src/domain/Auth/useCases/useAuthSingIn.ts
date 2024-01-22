@@ -22,7 +22,12 @@ export function useAuthSignIn(options?: MutateOptions<AuthCredentials>) {
 			}
 		},
 		onSuccess: (authCredentiasl) => {
-			saveAuthCredentials({ token: authCredentiasl.token, user: authCredentiasl.user })
+			saveAuthCredentials({
+				token: authCredentiasl.token,
+				user: authCredentiasl.user,
+				refreshToken: authCredentiasl.refreshToken,
+				tokenExpiresAt: authCredentiasl.tokenExpiresAt,
+			})
 		},
 	})
 

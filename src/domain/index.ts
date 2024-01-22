@@ -5,6 +5,7 @@ export * from './Auth/useCases/useAuthValueIsAvalibe'
 export * from './Auth/useCases/useAuthRequestNewPassword'
 export * from './Auth/authTypes'
 export * from './Auth/authService'
+export * from './Auth/authApi'
 
 export * from './User'
 
