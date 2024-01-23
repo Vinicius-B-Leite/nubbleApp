@@ -4,4 +4,5 @@ module.exports = {
 	coveragePathIgnorePatterns: ['/node_modules/'],
 	setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
 	moduleDirectories: ['node_modules', './src/tests'],
+	modulePathIgnorePatterns: ['.*/__mocks__/.*'],
 }

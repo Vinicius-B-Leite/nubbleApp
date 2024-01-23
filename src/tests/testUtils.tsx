@@ -1,12 +1,17 @@
 import React from 'react'
 
+import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from '@shopify/restyle'
 import { RenderOptions, render } from '@testing-library/react-native'
 
 import { theme } from '@theme'
 
 const AllProviders = ({ children }: React.PropsWithChildren) => {
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+	return (
+		<NavigationContainer>
+			<ThemeProvider theme={theme}>{children}</ThemeProvider>
+		</NavigationContainer>
+	)
 }
 
 function customRender<T>(
