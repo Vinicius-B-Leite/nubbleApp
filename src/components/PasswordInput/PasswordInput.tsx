@@ -16,6 +16,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
 			RightComponent={
 				<Icon name={isSecureTextEntry ? 'eyeOff' : 'eyeOn'} onPress={handleToggleSecureTextEntry} />
 			}
+			testID="password-input"
 			{...props}
 		/>
 	)

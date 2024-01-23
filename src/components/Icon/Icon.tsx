@@ -50,7 +50,7 @@ export function Icon({ name, color = 'backgroundContrast', size, onPress }: Icon
 
 	if (onPress) {
 		return (
-			<Pressable hitSlop={10} onPress={onPress}>
+			<Pressable hitSlop={10} onPress={onPress} testID={name}>
 				<SVGIcon color={colors[color]} size={size} />
 			</Pressable>
 		)
@@ -59,7 +59,7 @@ export function Icon({ name, color = 'backgroundContrast', size, onPress }: Icon
 	return <SVGIcon color={colors[color]} size={size} />
 }
 
-const iconRegistry = {
+export const iconRegistry = {
 	arrowLeft: ArrowLeftIcon,
 	arrowRight: ArrowRightIcon,
 	bell: BellIcon,
@@ -93,4 +93,4 @@ const iconRegistry = {
 
 type IconType = typeof iconRegistry
 
-type IconName = keyof IconType
+export type IconName = keyof IconType
