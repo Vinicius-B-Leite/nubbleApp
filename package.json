@@ -7,7 +7,7 @@
 		"ios": "react-native run-ios",
 		"lint": "eslint .",
 		"start": "react-native start --reset-cache",
-		"test": "jest",
+		"test": "jest --verbose --coverage",
 		"prepare": "husky install",
 		"adb-reverse": "adb reverse tcp:62599 tcp:62599"
 	},
@@ -36,7 +36,9 @@
 		"@babel/runtime": "^7.20.0",
 		"@react-native/metro-config": "^0.72.11",
 		"@tanstack/eslint-plugin-query": "^5.17.7",
+		"@testing-library/react-native": "^12.4.3",
 		"@tsconfig/react-native": "^3.0.0",
+		"@types/jest": "^29.5.11",
 		"@types/react": "^18.0.24",
 		"@types/react-test-renderer": "^18.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.11.0",

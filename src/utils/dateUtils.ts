@@ -2,9 +2,9 @@ import { parseISO, differenceInSeconds, format } from 'date-fns'
 
 function formatRelative(dateISO: string) {
 	const date = parseISO(dateISO)
-	const now = new Date()
+	const now = Date.now()
 
-	const diffInSeconds = differenceInSeconds(date, now)
+	const diffInSeconds = differenceInSeconds(now, date)
 	if (diffInSeconds < 60) {
 		return `${diffInSeconds} s`
 	}
@@ -16,25 +16,25 @@ function formatRelative(dateISO: string) {
 
 	const diffInHours = Math.round(diffInMinutes / 60)
 	if (diffInHours < 24) {
-		return `${diffInMinutes} h`
+		return `${diffInHours} h`
 	}
 
 	const diffInDays = Math.round(diffInHours / 24)
 	if (diffInDays < 7) {
-		return `${diffInMinutes} d`
+		return `${diffInDays} d`
 	}
 
 	const diffInWeeks = Math.round(diffInDays / 7)
 	if (diffInWeeks < 4) {
-		return `${diffInMinutes} sem`
+		return `${diffInWeeks} sem`
 	}
 
 	const diffInMonth = Math.round(diffInDays / 30)
 	if (diffInMonth < 12) {
-		return `${diffInMinutes} m`
+		return `${diffInMonth} mes`
 	}
 
-	return format(date, 'DD/MM/yyyy')
+	return format(date, 'dd/MM/yyyy')
 }
 
 export const dateUtils = {
