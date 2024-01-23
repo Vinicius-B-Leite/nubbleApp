@@ -16,5 +16,5 @@ export const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({
 	...rest
 }) => {
 	const { colors } = useTheme<Theme>()
-	return <RNActivityIndicator color={colors[color]} {...rest} />
+	return <RNActivityIndicator testID="activity-indicator" color={colors[color]} {...rest} />
 }
