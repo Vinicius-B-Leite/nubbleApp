@@ -1,5 +1,5 @@
-import { act, renderHook, waitFor } from '@testing-library/react-native'
-import { AllProviders } from 'testUtils'
+import { act, waitFor } from '@testing-library/react-native'
+import { renderHook } from 'testUtils'
 
 import { authService } from '../../authService'
 import { useAuthSignIn } from '../useAuthSingIn'
@@ -21,12 +21,11 @@ describe('useAuthSingIn', () => {
 	it('save credentials when success', async () => {
 		jest.spyOn(authService, 'signIn').mockReturnValueOnce(Promise.resolve(mock.authCredentials))
 
-		const { result } = renderHook(() => useAuthSignIn(), {
-			wrapper: AllProviders,
+		const { result } = renderHook(() => useAuthSignIn())
+
+		await act(() => {
+			result.current.signIn({ email: 'email@gmail.com', password: 'password' })
 		})
-
-		result.current.signIn({ email: 'email@gmail.com', password: 'password' })
-
 		await waitFor(() => expect(result.current.isSuccess).toBe(true))
 		expect(mockSaveAuthCredentials).toHaveBeenCalled()
 	})
@@ -34,7 +33,7 @@ describe('useAuthSingIn', () => {
 		jest.spyOn(authService, 'signIn').mockRejectedValueOnce(new Error('invalid user'))
 
 		const onError = jest.fn()
-		const { result } = renderHook(() => useAuthSignIn({ onError }), { wrapper: AllProviders })
+		const { result } = renderHook(() => useAuthSignIn({ onError }))
 
 		await act(() => {
 			result.current.signIn({ email: 'email@gmail.com', password: 'password' })
