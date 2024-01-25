@@ -5,7 +5,6 @@ import { theme } from '@theme'
 
 import { useAppSafeArea } from '../useAppSafeArea'
 
-jest.mock('react-native-safe-area-context')
 const mockedUseSafeAreaInsets = jest.mocked(useSafeAreaInsets)
 describe('useAppSafeArea', () => {
 	it('when the safe area is less than minimunm, it returns the minimum', () => {

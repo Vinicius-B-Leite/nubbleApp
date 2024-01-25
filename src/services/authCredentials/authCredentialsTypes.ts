@@ -5,4 +5,5 @@ export type AuthCredentialsService = {
 	saveAuthCredentials: (ac: AuthCredentials) => Promise<void>
 	removeAuthCredentials: () => Promise<void>
 	isLoading: boolean
+	userId: number | null
 }

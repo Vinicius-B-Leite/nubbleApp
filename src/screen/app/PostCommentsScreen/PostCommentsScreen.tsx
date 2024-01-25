@@ -1,7 +1,8 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import { useCommentsList, useUserGetById } from '@domain'
+import { useCommentsList } from '@domain'
+import { useAuthCredentials } from '@services'
 
 import { Box, Screen } from '@components'
 import { useAppSafeArea } from '@hooks'
@@ -14,7 +15,7 @@ import PostCommentTextMessage from './components/PostCommentTextMessage'
 export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>) {
 	const { postId, postAuthorId } = route.params
 	const { bottom } = useAppSafeArea()
-	const { user } = useUserGetById(1)
+	const { userId } = useAuthCredentials()
 	const { dataList: list, fetchNextPage, hasNextPage } = useCommentsList(postId)
 
 	return (
@@ -25,7 +26,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
 					keyExtractor={({ id }) => id.toString()}
 					contentContainerStyle={{ paddingBottom: bottom }}
 					renderItem={({ item }) => (
-						<PostCommentItem userId={user?.id || 1} postAuthorId={postAuthorId} comment={item} />
+						<PostCommentItem userId={userId} postAuthorId={postAuthorId} comment={item} />
 					)}
 					ListFooterComponent={
 						<PostCommentBottom hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />

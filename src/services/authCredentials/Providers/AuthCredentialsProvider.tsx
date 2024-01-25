@@ -12,6 +12,7 @@ export const AuthCredentialsContext = createContext<AuthCredentialsService>({
 	isLoading: false,
 	removeAuthCredentials: async () => {},
 	saveAuthCredentials: async () => {},
+	userId: null,
 })
 
 export const AuthCredentialsProvider = ({ children }: React.PropsWithChildren) => {
@@ -56,7 +57,13 @@ export const AuthCredentialsProvider = ({ children }: React.PropsWithChildren) =
 
 	return (
 		<AuthCredentialsContext.Provider
-			value={{ auth, isLoading, removeAuthCredentials, saveAuthCredentials }}
+			value={{
+				auth,
+				isLoading,
+				removeAuthCredentials,
+				saveAuthCredentials,
+				userId: auth?.user?.id || null,
+			}}
 		>
 			{children}
 		</AuthCredentialsContext.Provider>

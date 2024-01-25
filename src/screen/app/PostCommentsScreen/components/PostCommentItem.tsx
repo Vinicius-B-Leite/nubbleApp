@@ -8,7 +8,7 @@ import { Box, ProfileAvatar, Text, TouchableOpacityBox } from '@components'
 
 type PostCommentItemProps = {
 	comment: PostComments
-	userId: number
+	userId: number | null
 	postAuthorId: number
 }
 const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment, postAuthorId, userId }) => {

@@ -14,7 +14,8 @@
 			"@utils": ["src/utils"],
 			"@infra": ["src/infra"],
 			"@services": ["src/services"],
-			"testUtils": ["src/tests/testUtils"]
+			"testUtils": ["src/tests/testUtils"],
+			"tests": ["src/tests"]
 		}
 	}
 }
