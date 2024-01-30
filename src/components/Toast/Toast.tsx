@@ -17,7 +17,7 @@ export const Toast: React.FC = () => {
 			toValue: 1,
 			duration: 1000,
 			useNativeDriver: true,
-		}).start()//JIA*84723@`
+		}).start() //JIA*84723@`
 	}
 
 	const fadeOut = (onEndAnimation: () => void) => {
@@ -42,7 +42,10 @@ export const Toast: React.FC = () => {
 	}
 
 	return (
-		<Animated.View style={{ position: 'absolute', alignSelf: 'center', opacity: fadeAnimation }}>
+		<Animated.View
+			testID="toast"
+			style={{ position: 'absolute', alignSelf: 'center', opacity: fadeAnimation }}
+		>
 			<ToastContent toast={toast} />
 		</Animated.View>
 	)

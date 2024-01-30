@@ -7,6 +7,8 @@ import { RenderHookOptions, RenderOptions, render, renderHook } from '@testing-l
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { theme } from '@theme'
+import { AuthCredentialsProvider } from '@services'
+import { Toast } from '@components'
 
 export const AllProviders = () => {
 	const queryClient = new QueryClient({
@@ -56,18 +58,21 @@ export const AllScreenProviders = () => {
 	})
 	// eslint-disable-next-line react/display-name
 	return ({ children }: React.PropsWithChildren) => (
-		<SafeAreaProvider
-			initialMetrics={{
-				frame: { x: 0, y: 0, width: 0, height: 0 },
-				insets: { top: 0, left: 0, right: 0, bottom: 0 },
-			}}
-		>
-			<NavigationContainer>
-				<QueryClientProvider client={queryClient}>
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
-				</QueryClientProvider>
-			</NavigationContainer>
-		</SafeAreaProvider>
+		<AuthCredentialsProvider>
+			<ThemeProvider theme={theme}>
+				<SafeAreaProvider
+					initialMetrics={{
+						frame: { x: 0, y: 0, width: 0, height: 0 },
+						insets: { top: 0, left: 0, right: 0, bottom: 0 },
+					}}
+				>
+					<QueryClientProvider client={queryClient}>
+						<NavigationContainer>{children}</NavigationContainer>
+						<Toast />
+					</QueryClientProvider>
+				</SafeAreaProvider>
+			</ThemeProvider>
+		</AuthCredentialsProvider>
 	)
 }
 function customRender<T>(

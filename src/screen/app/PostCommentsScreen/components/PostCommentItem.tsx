@@ -39,6 +39,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment, postAuthorId
 			alignItems="center"
 			gap="s12"
 			mb="s16"
+			testID="post-comment-id"
 		>
 			<ProfileAvatar profileURL={comment.author.profileURL} />
 			<Box flex={1}>
